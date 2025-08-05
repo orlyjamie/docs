@@ -50,8 +50,8 @@
     }
   ],
   "logo": {
-    "light": "/logo (11).svg",
-    "dark": "/logo (11).svg"
+    "light": "/logo-light.svg",
+    "dark": "/logo-dark.svg"
   },
   "footer": {
     "socials": {
