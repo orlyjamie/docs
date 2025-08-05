@@ -85,5 +85,5 @@
       "linkedin": "https://linkedin.com/company/mintlify"
     }
   },
-  "openapi": "swagger.json"
+  "openapi": "/api-reference/openapi.json"
 }
