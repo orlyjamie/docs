@@ -1,33 +1,116 @@
 ---
-title: 'Introduction'
-description: 'Example section for showcasing API endpoints'
+title: API Introduction
+description: Get started with the Dvuln API for vulnerability management and security operations
 ---
 
-<Note>
-  If you're not looking to build API reference documentation, you can delete
-  this section by removing the api-reference folder.
-</Note>
+# Dvuln API Documentation
 
-## Welcome
+The Dvuln API enables you to programmatically manage projects, issues, and comments within your organization's security operations. Build custom integrations, automate workflows, and extend Dvuln's capabilities to fit your needs.
 
-There are two ways to build API documentation: [OpenAPI](https://mintlify.com/docs/api-playground/openapi/setup) and [MDX components](https://mintlify.com/docs/api-playground/mdx/configuration). For the starter kit, we are using the following OpenAPI specification.
+## Base URL
 
-<Card
-  title="Plant Store Endpoints"
-  icon="leaf"
-  href="https://github.com/mintlify/starter/blob/main/api-reference/openapi.json"
->
-  View the OpenAPI specification file
-</Card>
+All API requests are made to:
+
+```
+https://console.dvuln.com
+```
 
 ## Authentication
 
-All API endpoints are authenticated using Bearer tokens and picked up from the specification file.
+The Dvuln API uses API key authentication. Include your API key in the request headers:
+
+```bash
+Authorization: Bearer YOUR_API_KEY
+```
+
+<Warning>
+Keep your API key secure and never expose it in client-side code or public repositories.
+</Warning>
+
+## Quick Start
+
+### 1. Get your API key
+
+Generate an API key from your Dvuln dashboard under **Settings → API Keys**.
+
+### 2. Make your first request
+
+Test your authentication with the `/api/org/info` endpoint:
+
+```bash
+curl -X GET https://console.dvuln.com/api/org/info \
+  -H "Authorization: Bearer YOUR_API_KEY"
+```
+
+### 3. Explore the API
+
+Use the interactive playground on each endpoint page to test requests directly from your browser.
+
+## Core Resources
+
+### Organizations
+Manage organization settings and retrieve organization information.
+
+### Projects
+Create, update, and manage security projects within your organization.
+
+### Issues
+Track vulnerabilities, security findings, and remediation efforts.
+
+### Comments
+Add notes, updates, and collaborate on security issues.
+
+## Response Format
+
+All API responses return JSON with consistent formatting:
 
 ```json
-"security": [
-  {
-    "bearerAuth": []
-  }
-]
+{
+  "data": {
+    // Response data
+  },
+  "success": true,
+  "message": "Operation completed successfully"
+}
 ```
+
+## Error Handling
+
+The API returns standard HTTP status codes:
+
+| Status Code | Description |
+|------------|-------------|
+| 200 | Success |
+| 400 | Bad Request - Invalid parameters |
+| 403 | Forbidden - Invalid API key |
+| 404 | Not Found - Resource doesn't exist |
+| 500 | Internal Server Error |
+
+Error responses include details:
+
+```json
+{
+  "error": {
+    "code": "INVALID_API_KEY",
+    "message": "The provided API key is invalid or expired"
+  },
+  "success": false
+}
+```
+
+## Rate Limits
+
+API requests are rate limited to ensure platform stability:
+- **Default limit**: 1000 requests per hour
+- **Burst limit**: 100 requests per minute
+
+Rate limit headers are included in all responses:
+- `X-RateLimit-Limit`: Maximum requests per hour
+- `X-RateLimit-Remaining`: Requests remaining
+- `X-RateLimit-Reset`: Unix timestamp when limit resets
+
+## Need Help?
+
+- [Contact Support](mailto:support@dvuln.com)
+- [API Status Page](https://status.dvuln.com)
+- [Developer Community](https://community.dvuln.com)
